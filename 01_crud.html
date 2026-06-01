@@ -5,5 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MockAPI</title>
   </head>
-  <body></body>
+  <body>
+    <section>
+      <h1>포켓몬 등록</h1>
+      <form id="pokeRegister">
+        <input name="pokeName" required />
+        <button>등록</button>
+      </form>
+      <section id="pokeList"></section>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
+    <script>
+      const pokeRegisterForm = document.querySelector("#pokeRegister");
+      const pokeList = document.querySelector("#pokeList");
+      document.addEventListener("DOMContentLoaded", domHandler);
+      pokeRegisterForm.addEventListener("submit", formHandler);
+
+      async function formHandler(e) {
+        e.preventDefault();
+        formData = new FormData(e.target);
+        console.log(...formData);
+        console.log(formData.get("pokeName"));
+
+        await createData(formData.get("pokeName"));
+
+        drawPokeList(await getData());
+      }
+
+      async function getData() {
+        const apiUrl = "https://6a1ce1dc8858a003817c2320.mockapi.io/pokemon";
+
+        const response = await axios.get(apiUrl);
+        // const response = fetch(apiUrl, { method: "GET" }).then((response) =>
+        //   response.json(),
+        // );
+        //   .then((response) => response.text())
+        //   .then((text) => console.log(text));
+        console.log("response-data", response.data);
+        return response.data;
+      }
+
+      async function createData(name) {
+        const apiUrl = "https://6a1ce1dc8858a003817c2320.mockapi.io/pokemon";
+        // const formData = new FormData();
+        // formData.append("name", name);
+        const payload = { name };
+        const response = await axios.post(apiUrl, payload);
+        console.log("response-data", response.data);
+        // const response = await fetch(apiUrl, {
+        //   method: "POST",
+        //   body: JSON.stringify(payload),
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // }).then((response) => response.json());
+        // //   .then((response) => response.text())
+        // //   .then((text) => console.log(text));
+        // console.log(response);
+      }
+
+      async function domHandler() {
+        console.log("화면을 다시 그림");
+        const data = await getData();
+        console.log("name", data);
+      }
+
+      function drawPokeList(data) {
+        console.log("drawPokeList", data);
+        pokeList.innerHTML = "";
+        for (const v of data) {
+          const item = document.createElement("p");
+          item.textContent = v["name"];
+          pokeList.append(item);
+        }
+      }
+    </script>
+  </body>
 </html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poke API</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <section>
+      <form id="searchForm">
+        <h3>포켓몬 검색</h3>
+        <input name="search" required />
+        <button>검색</button>
+      </form>
+      <section id="searchContainer">
+        <h3>검색한 포켓몬</h3>
+        <section id="searchResult">
+          <p>현재 검색된 포켓몬이 없습니다</p>
+        </section>
+      </section>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
