@@ -29,6 +29,8 @@ function drawPoke(data) {
     <audio src="${data.cries.latest}" controls></audio>
   </div>
   `;
+  const audio = document.querySelector("audio");
+  audio.volume = 0.1;
 }
 
 function getFormData(event) {
