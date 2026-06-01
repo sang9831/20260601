@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>포켓몬 띠부씰 가챠</title>
+    <meta
+      name="description"
+      content="포켓몬 띠부씰을 랜덤으로 뽑고, 최근 획득 목록과 수집 통계를 저장하는 가챠 웹앱"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Pokémon Sticker Gacha</p>
+          <h1>포켓몬 띠부씰 가챠</h1>
+        </div>
+        <button id="muteToggle" class="icon-button" type="button" aria-pressed="false">
+          효과음 켜짐
+        </button>
+      </header>
+
+      <main class="layout">
+        <aside class="panel side-panel recent-panel">
+          <div class="panel-title">
+            <p class="eyebrow">최근 획득</p>
+            <h2>최근 획득 띠부씰</h2>
+          </div>
+          <ul id="recentList" class="recent-list" aria-live="polite">
+            <li class="empty-state">아직 획득한 띠부씰이 없습니다.</li>
+          </ul>
+        </aside>
+
+        <section class="panel center-panel">
+          <div class="panel-title center-copy">
+            <p class="eyebrow">Gacha Zone</p>
+            <h2>띠부씰 포장지를 눌러 개봉하세요</h2>
+            <p id="statusText" class="status-text">포장지를 클릭하면 랜덤 포켓몬 띠부씰이 등장합니다.</p>
+          </div>
+
+          <div class="stage" id="stage">
+            <button id="gachaButton" class="gacha-button" type="button" aria-label="띠부씰 포장지 열기">
+              <span class="stage-glow"></span>
+              <span class="package-label">TAP TO OPEN</span>
+              <span class="package-pack">
+                <span class="package-half package-half-left"></span>
+                <span class="package-half package-half-right"></span>
+                <span class="package-center-seam"></span>
+                <span class="package-burst"></span>
+              </span>
+              <span class="package-shadow"></span>
+            </button>
+
+            <article id="stickerCard" class="sticker-card" hidden>
+              <div class="sticker-topline">
+                <span id="stickerNumber" class="sticker-number">#000</span>
+                <span id="stickerRarity" class="sticker-rarity">COMMON</span>
+              </div>
+
+              <img id="pokemonImage" class="sticker-image" alt="" />
+
+              <h3 id="pokemonName" class="sticker-name">Pokemon</h3>
+              <p id="pokemonTypes" class="sticker-meta">Type: -</p>
+              <p id="pokemonHeight" class="sticker-meta">Height: -</p>
+              <p id="pokemonWeight" class="sticker-meta">Weight: -</p>
+            </article>
+          </div>
+        </section>
+
+        <aside class="panel side-panel stats-panel">
+          <div class="panel-title">
+            <p class="eyebrow">수집 통계</p>
+            <h2>전체 현황</h2>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-label">총 뽑기</span>
+              <strong id="totalDraws">0회</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">고유 포켓몬</span>
+              <strong id="uniqueCount">0종</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">수집률</span>
+              <strong id="collectionRate">0.0%</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">전체 도감</span>
+              <strong id="dexCount">--</strong>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <audio id="pokemonCry" preload="auto"></audio>
+    <script src="./script.js"></script>
+  </body>
+</html>
